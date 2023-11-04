@@ -2,28 +2,47 @@
 
 require "connection.php";
 
-
 if (isset($_POST["register"])) {
 
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $encrypt_password = md5($password);
-
-    //check if user exist
-    $sql_check = "SELECT * FROM users WHERE email = '$email'";
-    $query_check = mysqli_query($connection, $sql_check);
-    if (mysqli_fetch_assoc($query_check)) {
-        //user exists
-        $error = "User already exist";
-    } else {
-        //insert into DB
-        $sql = "INSERT INTO users(name,email,password) 
-               VALUES('$name','$email','$encrypt_password')";
-        $query = mysqli_query($connection, $sql) or die("Cant save data");
-        $success = "Registration successfully";
-    }
+     // Collect user registration data
+     $username = $_POST['username'];
+     $email = $_POST['email'];
+ 
+     // Check if the user with the same email already exists
+     $checkQuery = "SELECT user_id FROM users WHERE email = ?";
+     $checkStmt = $connection->prepare($checkQuery);
+     $checkStmt->bind_param("s", $email);
+     $checkStmt->execute();
+     $checkResult = $checkStmt->get_result();
+ 
+     if ($checkResult->num_rows > 0) {
+        $error = "User with this email already exist Try again<";
+     } else {
+         // Continue with user registration
+         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+         $role = $_POST['role'];
+         $dietary_restrictions = $_POST['dietary_restrictions'];
+         
+         // Check if dietary preferences is an array before using implode
+         $dietary_preferences = is_array($_POST['dietary_preferences']) ? implode(',', $_POST['dietary_preferences']) : '';
+ 
+         // Prepare and execute the SQL query to insert user data
+         $sql = "INSERT INTO users (username, email, password, role, dietary_restrictions, dietary_preferences)
+                 VALUES (?, ?, ?, ?, ?, ?)";
+         $stmt = $connection->prepare($sql);
+         $stmt->bind_param("ssssss", $username, $email, $password, $role, $dietary_restrictions, $dietary_preferences);
+         
+         if ($stmt->execute()) {
+            $success = "User registration successfully";
+         } else {
+            $error = "Error: " . $sql . "<br>" . $connection->error;
+         }
+     }
+ 
+     // Close the database connection
+     $connection->close();
 }
+
 
 if (isset($_POST["login"])) {
 
