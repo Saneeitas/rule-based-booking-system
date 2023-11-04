@@ -35,17 +35,17 @@ require "inc/header.php"; ?>
             <form action="register.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" placeholder="Enter username" class="form-control" id="username" name="username" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" placeholder="Enter email" class="form-control" id="email" name="email" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" placeholder="Enter password" class="form-control" id="password" name="password" required>
             </div>
 
             <div class="form-group">
@@ -69,14 +69,17 @@ require "inc/header.php"; ?>
             </div>
 
             <div class="form-group">
-                <label for="dietary_preferences">Dietary Preferences:</label>
-                <select class="form-control" id="dietary_preferences" name="dietary_preferences" multiple>
-                    <option value="low-carb">Low Carb</option>
-                    <option value="high-protein">High Protein</option>
-                    <option value="organic">Organic</option>
-                    <option value="keto">Keto</option>
-                    <!-- Add more dietary preferences as needed -->
-                </select>
+            <label for="dietary_preferences">Dietary Preferences:</label>
+            <select class="form-control" id="dietary_preferences" name="dietary_preferences[]" multiple>
+                <option value="low-carb">Low Carb</option>
+                <option value="high-protein">High Protein</option>
+                <option value="organic">Organic</option>
+                <option value="keto">Keto</option>
+                <option value="vegetarian">vegetarian, </option>
+                <option value="vegan">vegan</option>
+                <!-- Add more dietary preferences as needed -->
+            </select>
+
             </div>
 
             <button type="submit" name="register" class="btn btn-primary mb-3 mt-3">Register</button>

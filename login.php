@@ -34,8 +34,8 @@ require "inc/header.php"; ?>
             </div>
 
             <div class="form-group">
-                <label for="">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Enter your email" id="" required>
+                <label for="">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Enter your username" id="" required>
             </div>
             <div class="form-group">
                 <label for="">Password</label>

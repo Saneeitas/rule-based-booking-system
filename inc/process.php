@@ -4,6 +4,8 @@ require "connection.php";
 
 if (isset($_POST["register"])) {
 
+    $dietary_preferences = '';
+
      // Collect user registration data
      $username = $_POST['username'];
      $email = $_POST['email'];
@@ -16,21 +18,22 @@ if (isset($_POST["register"])) {
      $checkResult = $checkStmt->get_result();
  
      if ($checkResult->num_rows > 0) {
-        $error = "User with this email already exist Try again<";
+        $error = "User with this email already exist Try again";
      } else {
-         // Continue with user registration
-         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-         $role = $_POST['role'];
-         $dietary_restrictions = $_POST['dietary_restrictions'];
-         
-         // Check if dietary preferences is an array before using implode
-         $dietary_preferences = is_array($_POST['dietary_preferences']) ? implode(',', $_POST['dietary_preferences']) : '';
- 
-         // Prepare and execute the SQL query to insert user data
-         $sql = "INSERT INTO users (username, email, password, role, dietary_restrictions, dietary_preferences)
-                 VALUES (?, ?, ?, ?, ?, ?)";
-         $stmt = $connection->prepare($sql);
-         $stmt->bind_param("ssssss", $username, $email, $password, $role, $dietary_restrictions, $dietary_preferences);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $role = $_POST['role'];
+        $dietary_restrictions = $_POST['dietary_restrictions'];
+
+        // Check if dietary preferences is an array before using implode
+        if (is_array($_POST['dietary_preferences'])) {
+            $dietary_preferences = implode(',', $_POST['dietary_preferences']);
+        }
+
+        // Prepare and execute the SQL query to insert user data
+        $sql = "INSERT INTO users (username, email, password, role, dietary_restrictions, dietary_preferences)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("ssssss", $username, $email, $password, $role, $dietary_restrictions, $dietary_preferences);
          
          if ($stmt->execute()) {
             $success = "User registration successfully";
@@ -46,39 +49,40 @@ if (isset($_POST["register"])) {
 
 if (isset($_POST["login"])) {
 
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $encrypt_password = md5($password);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    //check if user exist
-    $sql_check2 = "SELECT * FROM users WHERE email = '$email'";
-    $query_check2 = mysqli_query($connection, $sql_check2);
-    if (mysqli_fetch_assoc($query_check2)) {
-        //check if email and password exist
-        $sql_check = "SELECT * FROM users WHERE email = '$email' AND password = '$encrypt_password'";
-        $query_check = mysqli_query($connection, $sql_check);
-        if ($result = mysqli_fetch_assoc($query_check)) {
-            //Login to dashboard
-            $_SESSION["user"] = $result;
-            if ($result["role"] == "user") {
-                if (isset($_SESSION["url"])) {
-                    $recipe_id = $_SESSION["url"];
-                    header("location: read-recipe.php?recipe_id=$recipe_id");
-                } else {
-                    header("location: new-recipe.php");
-                }
-            } else {
-                header("location: dashboard.php");
-            }
-            $success = "User logged in";
+    // Prepare and execute the SQL query to retrieve user data by username
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            // Login successful, store user data in the session
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+
+            $_SESSION['dietary_preferences'] = $user['dietary_preferences'];
+            $_SESSION['dietary_restrictions'] = $user['dietary_restrictions'];
+
+            header("location: menu.php");
+                        //exit();
+
+                        $success = "User logged in";
         } else {
-            //user password wrong
-            $error = "User password wrong";
+            $error = "Incorrect password, Try again";
         }
     } else {
-        //user not found
-        $error = "User email not found";
+        $error = "User not found, Try again";
     }
+
+    // Close the database connection
+    $connection->close();
 }
 
 
