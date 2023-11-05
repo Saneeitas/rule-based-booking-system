@@ -30,8 +30,13 @@ require "inc/header.php"; ?>
                                     Welcome <?php echo $_SESSION["user"]["username"]; ?> 
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link active text-dark" aria-current="page" href="">
+                                    All Foods
+                                </a>
                             </li>
+
+                            
                         </ul>
                     </div>
             </div>
@@ -54,45 +59,39 @@ require "inc/header.php"; ?>
                     }
                     ?>
                     <form action="" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
                             <label for="">Select Image</label>
                             <input type="file" name="thumbnail" id="" class="form-control" required>
-                        </div>
+                          </div>
+                            </div>
+                        <div class="col-6">
                         <div class="form-group">
-                            <label for="">Title</label>
-                            <input type="text" name="title" placeholder="Enter title" class="form-control" id="" required>
+                            <label for="">Dish name</label>
+                            <input type="text" name="name" placeholder="Enter dish name" class="form-control" id="" required>
+                        </div>
+                         </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="">Ingredients</label>
-                                    <textarea name="ingredient" id="" placeholder="Enter Ingredients" cols="30" rows="5" class="form-control" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Cook Time</label>
-                                    <textarea name="cook_time" id="" placeholder="Enter Cook Time" cols="30" rows="5" class="form-control" required></textarea>
+                                    <input type="text" name="ingredients" placeholder="Enter ingredient" class="form-control" id="" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="">Yield</label>
-                                    <input type="text" name="yield" placeholder="Enter yield" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Category</label>
-                                    <select name="category_id" class="form-control" id="">
+                                    <label for="">Cafeteria</label>
+                                    <select name="cafeteria_id" class="form-select" id="">
                                         <?php
-                                        $sql = "SELECT * FROM category ORDER BY id DESC";
+                                        $sql = "SELECT * FROM cafeterias ORDER BY cafeteria_id DESC";
                                         $query = mysqli_query($connection, $sql);
                                         while ($result = mysqli_fetch_assoc($query)) {
                                         ?>
-                                            <option value="<?php echo $result["id"] ?>">
+                                            <option value="<?php echo $result["cafeteria_id"] ?>">
                                                 <?php echo $result["name"] ?>
                                             </option>
                                         <?php
@@ -101,14 +100,58 @@ require "inc/header.php"; ?>
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Portion Size</label>
+                                    <select name="portion_size" class="form-select" id="">
+                                            <option value="Medium">Medium</option>
+                                            <option value="Medium">Large</option>
+                                            <option value="Medium">Small</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="">Direction</label>
-                            <textarea name="direction" id="" placeholder="Enter recipes direction" cols="30" rows="5" class="form-control" required></textarea>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="">Calories</label>
+                                    <input type="text" name="calories" placeholder="E.g 200" class="form-control" id="" required>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="">Carbohydrates</label>
+                                    <input type="text" name="carbohydrates" placeholder="E.g 200" class="form-control" id="" required>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="">Protein</label>
+                                    <input type="text" name="protein" placeholder="E.g 450" class="form-control" id="" required>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="">Fats</label>
+                                    <input type="text" name="fats" placeholder="E.g 300" class="form-control" id="" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="new_recipe" style="background-color:#E57C23;" class="btn btn-mc text-white my-2">
+                            <label for="">Dietary preferences</label>
+                           
+                            <select class="form-select" id="dietary_tags" name="dietary_tags[]" multiple>
+                                <option value="low-carb">Low Carb</option>
+                                <option value="high-protein">High Protein</option>
+                                <option value="organic">Organic</option>
+                                <option value="keto">Keto</option>
+                                <option value="vegetarian">vegetarian</option>
+                                <option value="vegan">vegan</option>
+                                <!-- Add more dietary preferences as needed -->
+                            </select>
+                          </div>
+                        <div class="form-group">
+                            <button type="submit" name="add_food" style="background-color:#E57C23;" class="btn btn-mc text-white my-2">
                                 New Recipe</button>
                         </div>
                 </div>

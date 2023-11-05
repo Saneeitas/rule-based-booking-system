@@ -42,7 +42,7 @@ if (isset($_POST["login"])) {
        //Login to dashboard
        $_SESSION["user"] = $result;
        if($result["role"] == "admin"){
-        $success = "User logged in"; 
+        header("location: dashboard.php");
        }else{
         header("location: index.php");
        } 
@@ -59,36 +59,45 @@ if (isset($_POST["login"])) {
 }
 
 
-if (isset($_POST["new_recipe"])) {
-    //uploading to upload folder
+if (isset($_POST["add_food"])) {
+    // Uploading to the upload folder
     $target_dir = "uploads/";
     $basename = basename($_FILES["thumbnail"]["name"]);
     $upload_file = $target_dir . $basename;
-    //move uploaded file
+
+    // Move uploaded file
     $move = move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $upload_file);
+
     if ($move) {
         $url = $upload_file;
-        $title = $_POST["title"];
-        $ingredient = $_POST["ingredient"];
-        $cook_time = $_POST["cook_time"];
-        $direction = $_POST["direction"];
-        $yield = $_POST["yield"];
-        $category_id = $_POST["category_id"];
+        $cafeteria_id = $_POST["cafeteria_id"];
+        $dish_name = $_POST["name"];
+        $ingredients = $_POST["ingredients"];
+        $portion_size = $_POST["portion_size"];
+        $calories = $_POST["calories"];
+        $carbohydrates = $_POST["carbohydrates"];
+        $protein = $_POST["protein"];
+        $dietary_tags = implode(",", $_POST["dietary_tags"]);
+        $fats = $_POST["fats"];
         $image = $url;
-        //sql
-        $sql = "INSERT INTO recipes(title,ingredient,direction,cook_time,yield,category_id,image) VALUES
-                ('$title','$ingredient','$direction','$cook_time','$yield','$category_id','$image')";
-        $query = mysqli_query($connection, $sql);
-        if ($query) {
-            //success message
-            $success = "New Recipe added";
+
+        // Create a prepared statement
+        $stmt = $connection->prepare("INSERT INTO menu_items (cafeteria_id, dish_name, ingredients, portion_size, calories, carbohydrates, protein, fats, dietary_tags, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        // Bind parameters
+        $stmt->bind_param("isssssssss", $cafeteria_id, $dish_name, $ingredients, $portion_size, $calories, $carbohydrates, $protein, $fats, $dietary_tags, $image);
+
+        if ($stmt->execute()) {
+            // Success message
+            $success = "Added Successfully";
         } else {
-            $error = "Unable to add new recipe";
+            $error = "Unable to add new food";
         }
     } else {
         $error = "Unable to upload image";
     }
 }
+
 
 if (isset($_POST["update_recipe"])) {
     $id = $_GET["edit_recipe_id"];
@@ -102,7 +111,7 @@ if (isset($_POST["update_recipe"])) {
             //parameters 
             $title = $_POST["title"];
             $ingredient = $_POST["ingredient"];
-            $cook_time = $_POST["cook_time"];
+            $calories = $_POST["cook_time"];
             $direction = $_POST["direction"];
             $yield = $_POST["yield"];
             $category_id = $_POST["category_id"];
