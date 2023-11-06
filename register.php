@@ -50,21 +50,9 @@ require "inc/header.php"; ?>
 
             <div class="form-group">
                 <label for="role">Role:</label>
-                <select class="form-control" id="role" name="role">
+                <select class="form-select" id="role" name="role">
                     <option value="student">Student</option>
                     <option value="staff">Staff</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="dietary_restrictions">Dietary Restrictions:</label>
-                <select class="form-control" id="dietary_restrictions" name="dietary_restrictions">
-                    <option value="">Select Dietary Restrictions</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="vegan">Vegan</option>
-                    <option value="gluten-free">Gluten-Free</option>
-                    <option value="nut-free">Nut-Free</option>
-                    <!-- Add more dietary restrictions as needed -->
                 </select>
             </div>
 
@@ -75,8 +63,8 @@ require "inc/header.php"; ?>
                 <option value="high-protein">High Protein</option>
                 <option value="organic">Organic</option>
                 <option value="keto">Keto</option>
-                <option value="vegetarian">vegetarian, </option>
-                <option value="vegan">vegan</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
                 <!-- Add more dietary preferences as needed -->
             </select>
 

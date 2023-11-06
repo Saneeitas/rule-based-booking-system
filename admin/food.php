@@ -113,7 +113,7 @@ if(!isset($_SESSION["user"])){
                                   <a href="edit-food.php? edit_food_id=<?php echo $result["menu_item_id"] ?>">
                                   <i class="fas fa-edit"></i></a>
                                    |
-                                  <a href="?delete_question=<?php echo $result["id"]; ?>">
+                                  <a href="?delete_food=<?php echo $result["menu_item_id"]; ?>">
                                   <i class="fas fa-trash-alt text-danger"></i></a>
                                 </td>
                              </tr>

@@ -22,7 +22,6 @@ if (isset($_POST["register"])) {
      } else {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = $_POST['role'];
-        $dietary_restrictions = $_POST['dietary_restrictions'];
 
         // Check if dietary preferences is an array before using implode
         if (is_array($_POST['dietary_preferences'])) {
@@ -30,10 +29,10 @@ if (isset($_POST["register"])) {
         }
 
         // Prepare and execute the SQL query to insert user data
-        $sql = "INSERT INTO users (username, email, password, role, dietary_restrictions, dietary_preferences)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, password, role, dietary_preferences)
+                VALUES (?, ?, ?, ?, ?)";
         $stmt = $connection->prepare($sql);
-        $stmt->bind_param("ssssss", $username, $email, $password, $role, $dietary_restrictions, $dietary_preferences);
+        $stmt->bind_param("sssss", $username, $email, $password, $role, $dietary_preferences);
          
          if ($stmt->execute()) {
             $success = "User registration successfully";

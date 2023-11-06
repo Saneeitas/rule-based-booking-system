@@ -219,16 +219,16 @@ if (isset($_POST["update_food"])) {
 //     }
 // }
 
-if (isset($_GET["delete_recipe"]) && !empty($_GET["delete_recipe"])) {
-    $id = $_GET["delete_recipe"];
+if (isset($_GET["delete_food"]) && !empty($_GET["delete_food"])) {
+    $id = $_GET["delete_food"];
     //sql
-    $sql = "DELETE FROM recipes WHERE id = '$id'";
+    $sql = "DELETE FROM menu_items WHERE menu_item_id = '$id'";
     $query = mysqli_query($connection, $sql);
     //check if
     if ($query) {
-        $success = "recipe deleted successfully";
+        $success = "food deleted successfully";
     } else {
-        $error = "Unable to delete recipe";
+        $error = "Unable to delete food";
     }
 }
 
