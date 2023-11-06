@@ -16,33 +16,39 @@ require "inc/header.php"; ?>
     //header content
     require './pages/header-home.php';
     include 'inc/process.php';
+
+    //if user click edit
+    if (isset($_GET["edit_food_id"]) && !empty($_GET["edit_food_id"])) {
+        $edit_food_id = $_GET["edit_food_id"];
+        //sql
+        $sql = "SELECT * FROM menu_items WHERE menu_item_id = '$edit_food_id'";
+        $query = mysqli_query($connection, $sql);
+        $result = mysqli_fetch_assoc($query);
+    } else {
+        header("location: food.php");
+    }
     ?>
 
     <div class="container p-3">
         <div class="row">
+
             <div class="col-2">
                 <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" aria-current="page" href="#">
-                                    <span data-feather="home" class="align-text-bottom"></span>
-                                    Welcome <?php echo $_SESSION["user"]["username"]; ?> 
+                             <a class="btn btn-md text-danger"  href="food.php">
+                             Back   
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-dark" aria-current="page" href="food.php">
-                                    All Foods
-                                </a>
+                           
                             </li>
-
-                            
                         </ul>
                     </div>
             </div>
             <div class="col-9">
                 <div class="container">
-                    <h6 class="text-center">Add New Recipes</h6>
+                    <h6>Edit Recipe</h6>
                     <?php
                     if (isset($error)) {
                     ?>
@@ -63,13 +69,13 @@ require "inc/header.php"; ?>
                         <div class="col-6">
                             <div class="form-group">
                             <label for="">Select Image</label>
-                            <input type="file" name="thumbnail" id="" class="form-control" required>
+                            <input type="file" name="thumbnail" id="" class="form-control">
                           </div>
                             </div>
                         <div class="col-6">
                         <div class="form-group">
                             <label for="">Dish name</label>
-                            <input type="text" name="name" placeholder="Enter dish name" class="form-control" id="" required>
+                            <input type="text" name="name" value="<?php echo $result["dish_name"] ?>" placeholder="Enter dish name" class="form-control" id="" required>
                         </div>
                          </div>
                         </div>
@@ -77,7 +83,7 @@ require "inc/header.php"; ?>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Ingredients</label>
-                                    <input type="text" name="ingredients" placeholder="Enter ingredient" class="form-control" id="" required>
+                                    <input type="text" name="ingredients" value="<?php echo $result["ingredients"] ?>" placeholder="Enter ingredient" class="form-control" id="" required>
                                 </div>
                             </div>
                         </div>
@@ -87,12 +93,12 @@ require "inc/header.php"; ?>
                                     <label for="">Cafeteria</label>
                                     <select name="cafeteria_id" class="form-select" id="">
                                         <?php
-                                        $sql = "SELECT * FROM cafeterias ORDER BY cafeteria_id DESC";
-                                        $query = mysqli_query($connection, $sql);
-                                        while ($result = mysqli_fetch_assoc($query)) {
+                                        $sql2 = "SELECT * FROM cafeterias ORDER BY cafeteria_id";
+                                        $query2 = mysqli_query($connection, $sql2);
+                                        while ($result2 = mysqli_fetch_assoc($query2)) {
                                         ?>
-                                            <option value="<?php echo $result["cafeteria_id"] ?>">
-                                                <?php echo $result["name"] ?>
+                                             <option value="<?php echo $result2["cafeteria_id"] ?>" <?php echo $result["cafeteria_id"] == $result2["cafeteria_id"] ? "selected" : "" ?>>
+                                                <?php echo $result2["name"] ?>
                                             </option>
                                         <?php
                                         }
@@ -104,9 +110,10 @@ require "inc/header.php"; ?>
                                 <div class="form-group">
                                     <label for="">Portion Size</label>
                                     <select name="portion_size" class="form-select" id="">
-                                            <option value="Medium">Medium</option>
+                                            <option value="<?php echo $result["portion_size"] ?>" selected> <?php echo $result["portion_size"] ?> </option>
                                             <option value="Medium">Large</option>
                                             <option value="Medium">Small</option>
+                                            <option value="Medium">Medium</option>
                                     </select>
                                 </div>
                             </div>
@@ -115,25 +122,25 @@ require "inc/header.php"; ?>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="">Calories</label>
-                                    <input type="text" name="calories" placeholder="E.g 200" class="form-control" id="" required>
+                                    <input type="text" name="calories" value="<?php echo $result["calories"] ?>" placeholder="E.g 200" class="form-control" id="" required>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="">Carbohydrates</label>
-                                    <input type="text" name="carbohydrates" placeholder="E.g 200" class="form-control" id="" required>
+                                    <input type="text" name="carbohydrates"  value="<?php echo $result["carbohydrates"] ?>" placeholder="E.g 200" class="form-control" id="" required>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="">Protein</label>
-                                    <input type="text" name="protein" placeholder="E.g 450" class="form-control" id="" required>
+                                    <input type="text" name="protein" value="<?php echo $result["protein"] ?>" placeholder="E.g 450" class="form-control" id="" required>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="">Fats</label>
-                                    <input type="text" name="fats" placeholder="E.g 300" class="form-control" id="" required>
+                                    <input type="text" name="fats" value="<?php echo $result["fats"] ?>" placeholder="E.g 300" class="form-control" id="" required>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +148,7 @@ require "inc/header.php"; ?>
                             <label for="">Dietary preferences</label>
                            
                             <select class="form-select" id="dietary_tags" name="dietary_tags[]" multiple>
+                            <?php echo $result["dietary"] ?>
                                 <option value="low-carb">Low Carb</option>
                                 <option value="high-protein">High Protein</option>
                                 <option value="organic">Organic</option>
@@ -149,21 +157,26 @@ require "inc/header.php"; ?>
                                 <option value="vegan">vegan</option>
                                 <!-- Add more dietary preferences as needed -->
                             </select>
-                          </div>
+                          </div>  
+
                         <div class="form-group">
-                            <button type="submit" name="add_food" style="background-color:#E57C23;" class="btn btn-mc text-white my-2">
-                                New Recipe</button>
+                            <button type="submit" name="update_food" style="background-color:#E57C23;" class="btn btn-sm text-white my-2">
+                                Update</button>
                         </div>
                 </div>
                 </form>
             </div>
         </div>
     </div>
-    <?php
-    //footer content
-    require './pages/footer-home.php';
-    //footer script
-    require "inc/footer.php";
-    ?>
 </div>
+
+<?php
+//footer content
+require './pages/footer-home.php'; ?>
+
 </div>
+
+
+<?php
+//footer script
+require "inc/footer.php";  ?>

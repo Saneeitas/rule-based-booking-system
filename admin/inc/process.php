@@ -99,58 +99,125 @@ if (isset($_POST["add_food"])) {
 }
 
 
-if (isset($_POST["update_recipe"])) {
-    $id = $_GET["edit_recipe_id"];
+if (isset($_POST["update_food"])) {
+    $id = $_GET["edit_food_id"];
+    
+    // Check if a new image file is provided
     if ($_FILES["thumbnail"]["name"] != "") {
-        //upload image
+        // Upload the new image
         $target_dir = "uploads/";
         $url = $target_dir . basename($_FILES["thumbnail"]["name"]);
-        //move uploaded file
+        
         if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $url)) {
-            //update to database
-            //parameters 
-            $title = $_POST["title"];
-            $ingredient = $_POST["ingredient"];
-            $calories = $_POST["cook_time"];
-            $direction = $_POST["direction"];
-            $yield = $_POST["yield"];
-            $category_id = $_POST["category_id"];
+            // If the image is uploaded successfully, update the database with the new image.
             $image = $url;
-            //sql
-            $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-                    cook_time='$cook_time',direction='$direction',yield='$yield', 
-                    category_id='$category_id', image='$image' WHERE id='$id' ";
-            $query = mysqli_query($connection, $sql);
-            //check if
-            if ($query) {
-                $success = "Recipe updated";
-            } else {
-                $error = "Unable to update recipe";
-            }
-        }
-    } else {
-        //leave the upload image and
-        //update to database
-        //parameters 
-        $title = $_POST["title"];
-        $ingredient = $_POST["ingredient"];
-        $cook_time = $_POST["cook_time"];
-        $direction = $_POST["direction"];
-        $yield = $_POST["yield"];
-        $category_id = $_POST["category_id"];
-        //sql
-        $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-            cook_time='$cook_time',direction='$direction',yield='$yield', 
-            category_id='$category_id' WHERE id='$id' ";
-        $query = mysqli_query($connection, $sql);
-        //check if
-        if ($query) {
-            $success = "recipe updated";
         } else {
-            $error = "Unable to update recipe";
+            $error = "Unable to update food";
         }
     }
+    
+    // Parameters
+    $name = $_POST["name"];
+    $ingredients = $_POST["ingredients"];
+    $cafeteria_id = $_POST["cafeteria_id"];
+    $portion_size = $_POST["portion_size"];
+    $calories = $_POST["calories"];
+    $carbohydrates = $_POST["carbohydrates"];
+    $protein = $_POST["protein"];
+    $fats = $_POST["fats"];
+    
+    // Check if dietary_tags is set and not empty, then implode it; otherwise, set it to an empty string
+    $dietary_tags = !empty($_POST["dietary_tags"]) ? implode(",", $_POST["dietary_tags"]) : "";
+    
+    // SQL query
+    $sql = "UPDATE menu_items 
+            SET dish_name = '$name',
+                ingredients = '$ingredients',
+                cafeteria_id = '$cafeteria_id',
+                portion_size = '$portion_size',
+                calories = '$calories',
+                carbohydrates = '$carbohydrates',
+                protein = '$protein',
+                fats = '$fats'";
+    
+    // If dietary_tags is not empty, update the dietary_tags column
+    if (!empty($dietary_tags)) {
+        $sql .= ", dietary_tags = '$dietary_tags'";
+    }
+    
+    // If a new image is provided, update the image field
+    if (isset($image)) {
+        $sql .= ", image_url = '$image'";
+    }
+    
+    $sql .= " WHERE menu_item_id = '$id'";
+    
+    // Execute the SQL query
+    $query = mysqli_query($connection, $sql);
+    
+    // Check if the query was successful
+    if ($query) {
+        $success = "Food updated";
+    } else {
+        $error = "Unable to update food";
+    }
 }
+
+
+
+
+// if (isset($_POST["update_food"])) {
+//     $id = $_GET["edit_food_id"];
+//     if ($_FILES["thumbnail"]["name"] != "") {
+//         //upload image
+//         $target_dir = "uploads/";
+//         $url = $target_dir . basename($_FILES["thumbnail"]["name"]);
+//         //move uploaded file
+//         if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $url)) {
+//             //update to database
+//             //parameters 
+//             $title = $_POST["title"];
+//             $ingredient = $_POST["ingredient"];
+//             $calories = $_POST["cook_time"];
+//             $direction = $_POST["direction"];
+//             $yield = $_POST["yield"];
+//             $category_id = $_POST["category_id"];
+//             $image = $url;
+//             //sql
+//             $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
+//                     cook_time='$cook_time',direction='$direction',yield='$yield', 
+//                     category_id='$category_id', image='$image' WHERE id='$id' ";
+//             $query = mysqli_query($connection, $sql);
+//             //check if
+//             if ($query) {
+//                 $success = "Recipe updated";
+//             } else {
+//                 $error = "Unable to update recipe";
+//             }
+//         }
+//     } else {
+//         //leave the upload image and
+//         //update to database
+//         //parameters 
+//         $title = $_POST["title"];
+//         $ingredient = $_POST["ingredient"];
+//         $cook_time = $_POST["cook_time"];
+//         $direction = $_POST["direction"];
+//         $yield = $_POST["yield"];
+//         $category_id = $_POST["category_id"];
+//         //sql
+//         $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
+//             cook_time='$cook_time',direction='$direction',yield='$yield', 
+//             category_id='$category_id' WHERE id='$id' ";
+//         $query = mysqli_query($connection, $sql);
+//         //check if
+//         if ($query) {
+//             $success = "recipe updated";
+//         } else {
+//             $error = "Unable to update recipe";
+//         }
+//     }
+// }
 
 if (isset($_GET["delete_recipe"]) && !empty($_GET["delete_recipe"])) {
     $id = $_GET["delete_recipe"];
