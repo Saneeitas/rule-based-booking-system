@@ -233,35 +233,14 @@ if (isset($_GET["delete_food"]) && !empty($_GET["delete_food"])) {
 }
 
 
-if (isset($_POST["comment_new"])) {
-    $comment = $_POST["comment"];
-    $user_id = $_SESSION["user"]["id"];
-    $recipe_id = $_GET["recipe_id"];
-
-    if (empty($_POST["comment"])) {
-        $error = "Your comment is required!";
-    } else {
-
-        //sql & query
-        $sql = "INSERT INTO comments(user_id,message,recipe_id) VALUES('$user_id','$comment','$recipe_id')";
-        $query = mysqli_query($connection, $sql);
-        //check if
-        if ($query) {
-            $success = "Comment added";
-        } else {
-            $error = "Unable to add comment";
-        }
-    }
-}
-
-if (isset($_GET["approve_recipe"]) && !empty($_GET["approve_recipe"])) {
-    $recipe_id = $_GET["approve_recipe"];
+if (isset($_GET["approve_booking"]) && !empty($_GET["approve_booking"])) {
+    $booking_id = $_GET["approve_booking"];
     //sql query
-    $sql = "UPDATE recipes SET status = 1 WHERE id = '$recipe_id'";
+    $sql = "UPDATE bookings SET status = 1 WHERE booking_id = '$booking_id'";
     $query = mysqli_query($connection, $sql);
     //check if
     if ($query) {
-        $success = "Recipe approved";
+        $success = "Booking approved";
     } else {
         $error = "Unable to approved Recipe";
     }
