@@ -4,7 +4,6 @@ Welcome to the Healthy Food Booking System! This system is designed to allow use
 
 # Features
 * User Registration and Authentication:
-
 Users can create an account with a unique username and password.
 Registered users can log in securely.
 
