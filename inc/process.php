@@ -1,5 +1,4 @@
 <?php
-
 require "connection.php";
 
 if (isset($_POST["register"])) {
@@ -85,100 +84,35 @@ if (isset($_POST["login"])) {
 }
 
 
-if (isset($_POST["new_recipe"])) {
-    //uploading to upload folder
-    $target_dir = "uploads/";
-    $basename = basename($_FILES["thumbnail"]["name"]);
-    $upload_file = $target_dir . $basename;
-    //move uploaded file
-    $move = move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $upload_file);
-    if ($move) {
-        $url = $upload_file;
-        $title = $_POST["title"];
-        $ingredient = $_POST["ingredient"];
-        $cook_time = $_POST["cook_time"];
-        $direction = $_POST["direction"];
-        $yield = $_POST["yield"];
-        $category_id = $_POST["category_id"];
-        $image = $url;
+if (isset($_POST["booking"])) {
+   
+        $user_id = $_SESSION["user_id"];
+        $menu_item_id = $_SESSION["menu_item_id"];
+        $booking_date = $_POST["booking_date"];
+        $booking_time = $_POST["booking_time"];
         //sql
-        $sql = "INSERT INTO recipes(title,ingredient,direction,cook_time,yield,category_id,image) VALUES
-                ('$title','$ingredient','$direction','$cook_time','$yield','$category_id','$image')";
+        $sql = "INSERT INTO bookings(user_id,menu_item_id,booking_time,booking_date) VALUES
+                ('$user_id','$menu_item_id','$booking_time','$booking_date')";
         $query = mysqli_query($connection, $sql);
         if ($query) {
             //success message
-            $success = "New Recipe added";
+            $success = "Booking Succeefully";
         } else {
-            $error = "Unable to add new recipe";
+            $error = "Booking not successfully";
         }
-    } else {
-        $error = "Unable to upload image";
-    }
+   
 }
 
-if (isset($_POST["update_recipe"])) {
-    $id = $_GET["edit_recipe_id"];
-    if ($_FILES["thumbnail"]["name"] != "") {
-        //upload image
-        $target_dir = "uploads/";
-        $url = $target_dir . basename($_FILES["thumbnail"]["name"]);
-        //move uploaded file
-        if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $url)) {
-            //update to database
-            //parameters 
-            $title = $_POST["title"];
-            $ingredient = $_POST["ingredient"];
-            $cook_time = $_POST["cook_time"];
-            $direction = $_POST["direction"];
-            $yield = $_POST["yield"];
-            $category_id = $_POST["category_id"];
-            $image = $url;
-            //sql
-            $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-                    cook_time='$cook_time',direction='$direction',yield='$yield', 
-                    category_id='$category_id', image='$image' WHERE id='$id' ";
-            $query = mysqli_query($connection, $sql);
-            //check if
-            if ($query) {
-                $success = "Recipe updated";
-            } else {
-                $error = "Unable to update recipe";
-            }
-        }
-    } else {
-        //leave the upload image and
-        //update to database
-        //parameters 
-        $title = $_POST["title"];
-        $ingredient = $_POST["ingredient"];
-        $cook_time = $_POST["cook_time"];
-        $direction = $_POST["direction"];
-        $yield = $_POST["yield"];
-        $category_id = $_POST["category_id"];
-        //sql
-        $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-            cook_time='$cook_time',direction='$direction',yield='$yield', 
-            category_id='$category_id' WHERE id='$id' ";
-        $query = mysqli_query($connection, $sql);
-        //check if
-        if ($query) {
-            $success = "recipe updated";
-        } else {
-            $error = "Unable to update recipe";
-        }
-    }
-}
-
-if (isset($_GET["delete_recipe"]) && !empty($_GET["delete_recipe"])) {
-    $id = $_GET["delete_recipe"];
+if (isset($_GET["delete_booking"]) && !empty($_GET["delete_booking"])) {
+    $id = $_GET["delete_booking"];
     //sql
-    $sql = "DELETE FROM recipes WHERE id = '$id'";
+    $sql = "DELETE FROM bookings WHERE booking_id = '$id'";
     $query = mysqli_query($connection, $sql);
     //check if
     if ($query) {
-        $success = "recipe deleted successfully";
+        $success = "Booking deleted successfully";
     } else {
-        $error = "Unable to delete recipe";
+        $error = "Unable to delete booking";
     }
 }
 

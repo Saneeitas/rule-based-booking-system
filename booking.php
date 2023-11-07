@@ -26,8 +26,8 @@ require "inc/header.php"; ?>
     } else {
         header("location: index.php");
     }
-    //session to store url
-    $_SESSION["url"] = $_GET["menu_item_id"];
+
+    $_SESSION["menu_item_id"] = $result["menu_item_id"];
     
 ?>
 
@@ -113,9 +113,6 @@ require "inc/header.php"; ?>
                                         Book</button>
                                 </div>
                                 </form>
-                                </div>
-                                <div class="col-6">
-                                   
                                 </div>
                             </div>
                 </div>
