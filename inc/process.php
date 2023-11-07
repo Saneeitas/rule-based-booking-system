@@ -20,18 +20,16 @@ if (isset($_POST["register"])) {
         $error = "User with this email already exist Try again";
      } else {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $role = $_POST['role'];
-
         // Check if dietary preferences is an array before using implode
         if (is_array($_POST['dietary_preferences'])) {
             $dietary_preferences = implode(',', $_POST['dietary_preferences']);
         }
 
         // Prepare and execute the SQL query to insert user data
-        $sql = "INSERT INTO users (username, email, password, role, dietary_preferences)
-                VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, password, dietary_preferences)
+                VALUES (?, ?, ?, ?)";
         $stmt = $connection->prepare($sql);
-        $stmt->bind_param("sssss", $username, $email, $password, $role, $dietary_preferences);
+        $stmt->bind_param("ssss", $username, $email, $password, $dietary_preferences);
          
          if ($stmt->execute()) {
             $success = "User registration successfully";
@@ -117,37 +115,4 @@ if (isset($_GET["delete_booking"]) && !empty($_GET["delete_booking"])) {
 }
 
 
-if (isset($_POST["comment_new"])) {
-    $comment = $_POST["comment"];
-    $user_id = $_SESSION["user"]["id"];
-    $recipe_id = $_GET["recipe_id"];
-
-    if (empty($_POST["comment"])) {
-        $error = "Your comment is required!";
-    } else {
-
-        //sql & query
-        $sql = "INSERT INTO comments(user_id,message,recipe_id) VALUES('$user_id','$comment','$recipe_id')";
-        $query = mysqli_query($connection, $sql);
-        //check if
-        if ($query) {
-            $success = "Comment added";
-        } else {
-            $error = "Unable to add comment";
-        }
-    }
-}
-
-if (isset($_GET["approve_recipe"]) && !empty($_GET["approve_recipe"])) {
-    $recipe_id = $_GET["approve_recipe"];
-    //sql query
-    $sql = "UPDATE recipes SET status = 1 WHERE id = '$recipe_id'";
-    $query = mysqli_query($connection, $sql);
-    //check if
-    if ($query) {
-        $success = "Recipe approved";
-    } else {
-        $error = "Unable to approved Recipe";
-    }
-}
 

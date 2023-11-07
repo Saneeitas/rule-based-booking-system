@@ -90,7 +90,7 @@ require "inc/header.php"; ?>
                             echo "<td>" . $result2["dish_name"] . "</td>";
                             ?>
                             <td scope="row">
-                                <img height="50" src="<?php echo $result2["image_url"]; ?>" alt=""
+                                <img height="50" src="admin/<?php echo $result2["image_url"]; ?>" alt=""
                                      style="width:50px; height:50px; object-fit:cover; object-position:center;">
                             </td>
                             <td><?php echo date("h:i a", strtotime($result["booking_time"])); ?></td>

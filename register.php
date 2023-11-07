@@ -49,14 +49,6 @@ require "inc/header.php"; ?>
             </div>
 
             <div class="form-group">
-                <label for="role">Role:</label>
-                <select class="form-select" id="role" name="role">
-                    <option value="student">Student</option>
-                    <option value="staff">Staff</option>
-                </select>
-            </div>
-
-            <div class="form-group">
             <label for="dietary_preferences">Dietary Preferences:</label>
             <select class="form-control" id="dietary_preferences" name="dietary_preferences[]" multiple>
                 <option value="low-carb">Low Carb</option>
@@ -65,6 +57,9 @@ require "inc/header.php"; ?>
                 <option value="keto">Keto</option>
                 <option value="vegetarian">Vegetarian</option>
                 <option value="vegan">Vegan</option>
+                <option value="Gluten-free">Gluten-free</option>
+                <option value="halal">Halal</option>
+                <option value="Diary-free">Diary-free</option>
                 <!-- Add more dietary preferences as needed -->
             </select>
 

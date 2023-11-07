@@ -85,7 +85,7 @@ require "inc/header.php"; ?>
                     </div>
                     <div class="col-4">
                         <div class="text-center">
-                            <img style="width:250px; height:250px;" src="<?php echo $result["image_url"] ?>" alt="">
+                            <img style="width:250px; height:250px;" src="admin/<?php echo $result["image_url"] ?>" alt="">
                         </div>
 
                     </div>

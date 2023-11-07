@@ -42,6 +42,9 @@ require "inc/header.php"; ?>
                             <a href="bookings.php" class="btn text-danger">
                                 <i class="fas fa-boxes" style="color:#E57C23;"></i> Bookings</a>
                         </li  class="list-group-item">
+                        <li  class="list-group-item">
+                        <a href="javascript:;" class="btn border btn-sm text-white" style="background-color:#E57C23;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-plus" ></i> New Cafeteria</a>
+                        </li  class="list-group-item">
                         </div>
                     </ul>
                 </div>
@@ -90,7 +93,7 @@ require "inc/header.php"; ?>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="">Cafeteria</label>
                                     <select name="cafeteria_id" class="form-select" id="">
@@ -108,42 +111,7 @@ require "inc/header.php"; ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Portion Size</label>
-                                    <select name="portion_size" class="form-select" id="">
-                                            <option value="Medium">Medium</option>
-                                            <option value="Medium">Large</option>
-                                            <option value="Medium">Small</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Calories</label>
-                                    <input type="text" name="calories" placeholder="E.g 200" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Carbohydrates</label>
-                                    <input type="text" name="carbohydrates" placeholder="E.g 200" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Protein</label>
-                                    <input type="text" name="protein" placeholder="E.g 450" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Fats</label>
-                                    <input type="text" name="fats" placeholder="E.g 300" class="form-control" id="" required>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="">Dietary preferences</label>
@@ -153,8 +121,11 @@ require "inc/header.php"; ?>
                                 <option value="high-protein">High Protein</option>
                                 <option value="organic">Organic</option>
                                 <option value="keto">Keto</option>
-                                <option value="vegetarian">vegetarian</option>
-                                <option value="vegan">vegan</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="Gluten-free">Gluten-free</option>
+                                <option value="halal">Halal</option>
+                                <option value="Diary-free">Diary-free</option>
                                 <!-- Add more dietary preferences as needed -->
                             </select>
                           </div>
@@ -167,6 +138,39 @@ require "inc/header.php"; ?>
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Cafeteria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action="" method="post">
+              <label for="">Name</label>
+              <div class="form-group">
+                  <input type="text" class="form-control" name="name" placeholder="Enter cafeteria name" id="" required>
+              </div>
+              <label for="">Location</label>
+              <div class="form-group">
+                  <input type="text" class="form-control" name="location" placeholder="Enter cafeteria location" id="" required>
+              </div>
+              <label for="">Contact Phone</label>
+              <input type="text" class="form-control" name="contact_phone" placeholder="Enter contact" id="" required>
+              <div class="my-3">
+                  <button type="submit" class="btn" style="background-color:#E57C23;" name="add_cafeteria"><i class="fas fa-plus text-light"></i></button>
+              </div>
+          </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn text-white" style="background-color: #E57C23"  data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
     <?php
     //footer content
     require './pages/footer-home.php';

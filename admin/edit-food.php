@@ -105,55 +105,21 @@ require "inc/header.php"; ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Portion Size</label>
-                                    <select name="portion_size" class="form-select" id="">
-                                            <option value="<?php echo $result["portion_size"] ?>" selected> <?php echo $result["portion_size"] ?> </option>
-                                            <option value="Medium">Large</option>
-                                            <option value="Medium">Small</option>
-                                            <option value="Medium">Medium</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Calories</label>
-                                    <input type="text" name="calories" value="<?php echo $result["calories"] ?>" placeholder="E.g 200" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Carbohydrates</label>
-                                    <input type="text" name="carbohydrates"  value="<?php echo $result["carbohydrates"] ?>" placeholder="E.g 200" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Protein</label>
-                                    <input type="text" name="protein" value="<?php echo $result["protein"] ?>" placeholder="E.g 450" class="form-control" id="" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="">Fats</label>
-                                    <input type="text" name="fats" value="<?php echo $result["fats"] ?>" placeholder="E.g 300" class="form-control" id="" required>
-                                </div>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label for="">Dietary preferences</label>
                            
                             <select class="form-select" id="dietary_tags" name="dietary_tags[]" multiple>
                             <?php echo $result["dietary"] ?>
-                                <option value="low-carb">Low Carb</option>
+                            <option value="low-carb">Low Carb</option>
                                 <option value="high-protein">High Protein</option>
                                 <option value="organic">Organic</option>
                                 <option value="keto">Keto</option>
-                                <option value="vegetarian">vegetarian</option>
-                                <option value="vegan">vegan</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="Gluten-free">Gluten-free</option>
+                                <option value="halal">Halal</option>
+                                <option value="Diary-free">Diary-free</option>
                                 <!-- Add more dietary preferences as needed -->
                             </select>
                           </div>  

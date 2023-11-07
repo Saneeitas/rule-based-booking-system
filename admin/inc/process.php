@@ -73,19 +73,14 @@ if (isset($_POST["add_food"])) {
         $cafeteria_id = $_POST["cafeteria_id"];
         $dish_name = $_POST["name"];
         $ingredients = $_POST["ingredients"];
-        $portion_size = $_POST["portion_size"];
-        $calories = $_POST["calories"];
-        $carbohydrates = $_POST["carbohydrates"];
-        $protein = $_POST["protein"];
         $dietary_tags = implode(",", $_POST["dietary_tags"]);
-        $fats = $_POST["fats"];
         $image = $url;
 
         // Create a prepared statement
-        $stmt = $connection->prepare("INSERT INTO menu_items (cafeteria_id, dish_name, ingredients, portion_size, calories, carbohydrates, protein, fats, dietary_tags, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO menu_items (cafeteria_id, dish_name, ingredients, dietary_tags, image_url) VALUES (?, ?, ?, ?, ?)");
         
         // Bind parameters
-        $stmt->bind_param("isssssssss", $cafeteria_id, $dish_name, $ingredients, $portion_size, $calories, $carbohydrates, $protein, $fats, $dietary_tags, $image);
+        $stmt->bind_param("issss", $cafeteria_id, $dish_name, $ingredients, $dietary_tags, $image);
 
         if ($stmt->execute()) {
             // Success message
@@ -120,11 +115,6 @@ if (isset($_POST["update_food"])) {
     $name = $_POST["name"];
     $ingredients = $_POST["ingredients"];
     $cafeteria_id = $_POST["cafeteria_id"];
-    $portion_size = $_POST["portion_size"];
-    $calories = $_POST["calories"];
-    $carbohydrates = $_POST["carbohydrates"];
-    $protein = $_POST["protein"];
-    $fats = $_POST["fats"];
     
     // Check if dietary_tags is set and not empty, then implode it; otherwise, set it to an empty string
     $dietary_tags = !empty($_POST["dietary_tags"]) ? implode(",", $_POST["dietary_tags"]) : "";
@@ -133,12 +123,7 @@ if (isset($_POST["update_food"])) {
     $sql = "UPDATE menu_items 
             SET dish_name = '$name',
                 ingredients = '$ingredients',
-                cafeteria_id = '$cafeteria_id',
-                portion_size = '$portion_size',
-                calories = '$calories',
-                carbohydrates = '$carbohydrates',
-                protein = '$protein',
-                fats = '$fats'";
+                cafeteria_id = '$cafeteria_id'";
     
     // If dietary_tags is not empty, update the dietary_tags column
     if (!empty($dietary_tags)) {
@@ -191,3 +176,20 @@ if (isset($_GET["approve_booking"]) && !empty($_GET["approve_booking"])) {
     }
 }
 
+
+if (isset($_POST["add_cafeteria"])) {
+   
+    $name = $_POST["name"];
+    $location = $_POST["location"];
+    $contact_phone = $_POST["contact_phone"];
+    //sql
+    $sql = "INSERT INTO cafeterias(name,location,contact_phone) VALUES ('$name','$location','$contact_phone')";
+    $query = mysqli_query($connection, $sql);
+    if ($query) {
+        //success message
+        $success = "Booking Succeefully";
+    } else {
+        $error = "Booking not successfully";
+    }
+
+}

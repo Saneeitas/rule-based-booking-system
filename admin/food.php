@@ -54,11 +54,6 @@ if(!isset($_SESSION["user"])){
                          <th scope="col">Cafeteria</th>
                         <th scope="col">Dish name</th>
                         <th scope="col">Ingredient</th>
-                        <th scope="col">Portion Size</th>
-                        <th scope="col">Calories</th>
-                        <th scope="col">Carbohydrates</th>
-                        <th scope="col">Protein</th>
-                        <th scope="col">Fats</th>
                         <th scope="col">Dietary</th>
                         <th scope="col">Action</th>
                         </tr>
@@ -94,11 +89,6 @@ if(!isset($_SESSION["user"])){
                                   ?>
                                 <td><?php echo $result["dish_name"]; ?></td>
                                 <td><?php echo $result["ingredients"]; ?></td>
-                                <td><?php echo $result["portion_size"]; ?></td>
-                                <td><?php echo $result["calories"]; ?></td>
-                                <td><?php echo $result["carbohydrates"]; ?></td>
-                                <td><?php echo $result["protein"]; ?></td>
-                                <td><?php echo $result["fats"]; ?></td>
                                 <td><?php echo $result["dietary_tags"]; ?></td>
                                 <td>
                                   <a href="edit-food.php? edit_food_id=<?php echo $result["menu_item_id"] ?>">
