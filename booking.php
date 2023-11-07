@@ -95,14 +95,21 @@ require "inc/header.php"; ?>
                 <div>
                     <h5 style="font-weight:bold;">Bookings Details</h5>
                             <div class="row">
-                                <div class="col-6">
                                 <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="">New comment</label>
-                                    <input type="text" name="comment" id="" class="form-control" placeholder="Enter your comment here" required> </textarea>
-                                </div>
+                                <div class="col-3">
+                             <div class="form-group">
+                                 <label for="">Booking Date</label>
+                                  <input type="date" name="booking_date" class="form-control" id="" required>
+                             </div>
+                         </div>
+                            <div class="col-3">
+                             <div class="form-group">
+                                 <label for="">Booking Time</label>
+                                  <input type="time" name="booking_time" class="form-control" id="" required>
+                             </div>
+                         </div>
                                 <div class="mt-2">
-                                    <button type="submit" name="comment_new" class="btn text-light" style="background-color:#E57C23;">
+                                    <button type="submit" name="booking" class="btn text-light" style="background-color:#E57C23;">
                                         Book</button>
                                 </div>
                                 </form>
