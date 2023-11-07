@@ -70,7 +70,7 @@ require "inc/header.php"; ?>
 
             </div>
 
-            <button type="submit" name="register" class="btn btn-primary mb-3 mt-3">Register</button>
+            <button type="submit" name="register" class="btn text-white my-3" style="background-color:#E57C23;">  <i class="fas fa-sign-in-alt"></i> Register</button>
             <p>If already registered <a href="login.php">Login</a></p>
         </form>
            

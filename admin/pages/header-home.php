@@ -1,6 +1,6 @@
 <nav class="navbar rounded navbar-light sticky-top" style="background-color:white">
   <div class=" container-fluid">
-    <a class="navbar-brand" style="color:#E57C23" href="index.php">
+    <a class="navbar-brand" style="color:#E57C23" href="#">
       <h4> <i class="fas fa-bars"></i> RBBS</h4>
     </a>
     <div class="d-flex">
@@ -13,10 +13,8 @@
       <?php
       } else {
       ?>
-        <a href="login.php" class="nav-link text-dark">
+        <a href="index.php" class="nav-link text-dark">
           <i class="fas fa-sign-in-alt"></i> Login </a><span></span>
-        <a href="register.php" class="nav-link text-dark">
-          <i class="fas fa-sign-in-alt"></i> Signup</a>
       <?php
       }
       ?>

@@ -25,24 +25,32 @@ require "inc/header.php"; ?>
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" aria-current="page" href="#">
+                                <h5 class="nav-link active text-dark" aria-current="page" href="#">
                                     <span data-feather="home" class="align-text-bottom"></span>
-                                    Welcome <?php echo $_SESSION["user"]["username"]; ?> 
-                                </a>
+                                    Admin Dashboard
+                                </h5>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-dark" aria-current="page" href="food.php">
-                                    All Foods
-                                </a>
-                            </li>
-
-                            
                         </ul>
+                <div class="col">
+                    <ul class="list-group">
+                        <div>    
+                        <li  class="list-group-item">
+                            <a href="food.php" class="btn text-danger">
+                                <i class="fas fa-boxes" style="color:#E57C23;"></i> All Foods</a>
+                        </li  class="list-group-item">
+                        <li  class="list-group-item">
+                            <a href="bookings.php" class="btn text-danger">
+                                <i class="fas fa-boxes" style="color:#E57C23;"></i> Bookings</a>
+                        </li  class="list-group-item">
+                        </div>
+                    </ul>
+                </div>
+                        
                     </div>
             </div>
             <div class="col-9">
                 <div class="container">
-                    <h6 class="text-center">Add New Recipes</h6>
+                    <h6 class="text-center">Add New Food</h6>
                     <?php
                     if (isset($error)) {
                     ?>
@@ -152,7 +160,7 @@ require "inc/header.php"; ?>
                           </div>
                         <div class="form-group">
                             <button type="submit" name="add_food" style="background-color:#E57C23;" class="btn btn-mc text-white my-2">
-                                New Recipe</button>
+                                Add Food</button>
                         </div>
                 </div>
                 </form>

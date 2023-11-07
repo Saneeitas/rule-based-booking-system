@@ -41,7 +41,7 @@ require "inc/header.php"; ?>
                 <label for="">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Enter password" id="" required>
             </div>
-            <button type="submit" name="login" class="btn text-white my-3" style="background-color:#E57C23;">Login</button>
+            <button type="submit" name="login" class="btn text-white my-3" style="background-color:#E57C23;"><i class="fas fa-sign-in-alt"></i> Login</button>
             <br>
             <p>If not registered <a href="register.php">Signup</a></p>
 

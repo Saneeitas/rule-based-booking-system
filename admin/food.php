@@ -17,28 +17,19 @@ if(!isset($_SESSION["user"])){
 
  <div class="container p-3">
      <div class="row">
-         <div class="col-12">
-             <div class="row">
-                 <div class="col-6"> 
-                     <h4>DASHBOARD</h4>  
-                 </div>
-             </div>
-         </div>
-         <div class="col-3">
+        
+         <div class="col-2">
     <ul class="list-group">
         <div> 
-        <li class="list-group-item" style="color:darkgreen;">
+        <li class="list-group-item" style="color:#E57C23;">
             <a href="dashboard.php" class="btn">
-                <i class="fas fa-grip-vertical"style="color:darkgreen;" ></i>Back </a>
+                <i class="fas fa-grip-vertical"style="color:#E57C23;" ></i> Back </a>
         </li>    
-        <li  class="list-group-item">
-            <a href="" class="btn text-danger">
-                <i class="fas fa-boxes" style="color:darkgreen;"></i> All Foods</a>
-        </li  class="list-group-item">
+        
         </div>
     </ul>
 </div>
-         <div class="col-9">
+         <div class="col-12">
              <div class="container">
                 <?php 
                     if(isset($error)) {

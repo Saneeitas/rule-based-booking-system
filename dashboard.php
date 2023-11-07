@@ -2,13 +2,10 @@
 session_start();
 
 //check if user is not logged in
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["username"])) {
     header("location: login.php");
 }
-//check if logged in as user
-if ($_SESSION["user"]["role"] == "user") {
-    header("location: new-recipe.php");
-}
+
 //header links
 require "inc/header.php"; ?>
 
@@ -25,9 +22,9 @@ require "inc/header.php"; ?>
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active text-dark" aria-current="page" href="#">
+                            <a class="nav-link active text-dark" aria-current="page" href="menu.php">
                                 <span data-feather="home" class="align-text-bottom"></span>
-                               Welcome <?php echo $_SESSION["user"]["name"]; ?> 
+                                Back
                             </a>
                         </li>
                         <li class="nav-item">

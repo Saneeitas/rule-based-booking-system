@@ -36,11 +36,10 @@ require "inc/header.php"; ?>
                 <nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column">
-                            <li class="nav-item">
-                             <a class="btn btn-md text-danger"  href="food.php">
-                             Back   
-                                </a>
-                            </li>
+                        <li class="list-group-item" style="color:#E57C23;">
+                            <a href="food.php" class="btn">
+                                <i class="fas fa-grip-vertical"style="color:#E57C23;" ></i> Back </a>
+                        </li>  
                            
                             </li>
                         </ul>
@@ -48,7 +47,7 @@ require "inc/header.php"; ?>
             </div>
             <div class="col-9">
                 <div class="container">
-                    <h6>Edit Recipe</h6>
+                    <h6>Edit Food</h6>
                     <?php
                     if (isset($error)) {
                     ?>
