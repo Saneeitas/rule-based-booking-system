@@ -164,61 +164,6 @@ if (isset($_POST["update_food"])) {
 }
 
 
-
-
-// if (isset($_POST["update_food"])) {
-//     $id = $_GET["edit_food_id"];
-//     if ($_FILES["thumbnail"]["name"] != "") {
-//         //upload image
-//         $target_dir = "uploads/";
-//         $url = $target_dir . basename($_FILES["thumbnail"]["name"]);
-//         //move uploaded file
-//         if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $url)) {
-//             //update to database
-//             //parameters 
-//             $title = $_POST["title"];
-//             $ingredient = $_POST["ingredient"];
-//             $calories = $_POST["cook_time"];
-//             $direction = $_POST["direction"];
-//             $yield = $_POST["yield"];
-//             $category_id = $_POST["category_id"];
-//             $image = $url;
-//             //sql
-//             $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-//                     cook_time='$cook_time',direction='$direction',yield='$yield', 
-//                     category_id='$category_id', image='$image' WHERE id='$id' ";
-//             $query = mysqli_query($connection, $sql);
-//             //check if
-//             if ($query) {
-//                 $success = "Recipe updated";
-//             } else {
-//                 $error = "Unable to update recipe";
-//             }
-//         }
-//     } else {
-//         //leave the upload image and
-//         //update to database
-//         //parameters 
-//         $title = $_POST["title"];
-//         $ingredient = $_POST["ingredient"];
-//         $cook_time = $_POST["cook_time"];
-//         $direction = $_POST["direction"];
-//         $yield = $_POST["yield"];
-//         $category_id = $_POST["category_id"];
-//         //sql
-//         $sql = "UPDATE recipes SET title ='$title', ingredient='$ingredient', 
-//             cook_time='$cook_time',direction='$direction',yield='$yield', 
-//             category_id='$category_id' WHERE id='$id' ";
-//         $query = mysqli_query($connection, $sql);
-//         //check if
-//         if ($query) {
-//             $success = "recipe updated";
-//         } else {
-//             $error = "Unable to update recipe";
-//         }
-//     }
-// }
-
 if (isset($_GET["delete_food"]) && !empty($_GET["delete_food"])) {
     $id = $_GET["delete_food"];
     //sql
