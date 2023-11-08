@@ -23,7 +23,8 @@ if(!isset($_SESSION["user"])){
         <div> 
         <li class="list-group-item" style="color:#E57C23;">
             <a href="dashboard.php" class="btn">
-                <i class="fas fa-grip-vertical"style="color:#E57C23;" ></i> Back </a>
+            <i class="fas fa-backward" style="color:#E57C23;"></i> 
+              Back </a>
         </li>    
         
         </div>

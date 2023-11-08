@@ -36,7 +36,7 @@ require "inc/header.php"; ?>
                         <div>    
                         <li  class="list-group-item">
                             <a href="food.php" class="btn text-danger">
-                                <i class="fas fa-boxes" style="color:#E57C23;"></i> All Foods</a>
+                                <i class="fas fa-cookie" style="color:#E57C23;"></i> All Foods</a>
                         </li  class="list-group-item">
                         <li  class="list-group-item">
                             <a href="bookings.php" class="btn text-danger">

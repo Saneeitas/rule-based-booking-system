@@ -39,7 +39,7 @@ require "inc/header.php"; ?>
                         <li class="nav-item">
                             <a class="nav-link active text-dark" aria-current="page" href="menu.php">
                                 <span data-feather="home" class="align-text-bottom"></span>
-                                Back
+                                <i class="fas fa-backward"></i> Back
                             </a>
                         </li>
 
@@ -110,7 +110,7 @@ require "inc/header.php"; ?>
                          </div>
                                 <div class="mt-2">
                                     <button type="submit" name="booking" class="btn text-light" style="background-color:#E57C23;">
-                                        Book</button>
+                                    <i class="fas fa-plus"></i>  Book</button>
                                 </div>
                                 </form>
                                 </div>

@@ -38,7 +38,7 @@ require "inc/header.php"; ?>
                         <ul class="nav flex-column">
                         <li class="list-group-item" style="color:#E57C23;">
                             <a href="food.php" class="btn">
-                                <i class="fas fa-grip-vertical"style="color:#E57C23;" ></i> Back </a>
+                            <i class="fas fa-backward" style="color:#E57C23;"></i> Back </a>
                         </li>  
                            
                             </li>
@@ -87,7 +87,7 @@ require "inc/header.php"; ?>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="">Cafeteria</label>
                                     <select name="cafeteria_id" class="form-select" id="">
@@ -126,7 +126,7 @@ require "inc/header.php"; ?>
 
                         <div class="form-group">
                             <button type="submit" name="update_food" style="background-color:#E57C23;" class="btn btn-sm text-white my-2">
-                                Update</button>
+                            <i class="fas fa-edit"></i> Update</button>
                         </div>
                 </div>
                 </form>

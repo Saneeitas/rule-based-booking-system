@@ -25,7 +25,7 @@ require "inc/header.php"; ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="dashboard.php" style="color:#E57C23;">
                                     <span data-feather="file" class="align-text-bottom"></span>
-                                   Back
+                                    <i class="fas fa-backward"></i>  Back
                                 </a>
                             </li>
                             </li>

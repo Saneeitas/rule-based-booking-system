@@ -61,7 +61,7 @@ require "inc/header.php"; ?>
                     echo '<p class="card-text">Dietary: ' . $row['dietary_tags'] . '</p>';
 
                     // Add a "Book Now" button with a link to a booking page
-                    echo '<a href="booking.php?menu_item_id=' . $row['menu_item_id'] . '" class="btn text-white" style="background-color:#E57C23" >Book Now</a>';
+                    echo '<a href="booking.php?menu_item_id=' . $row['menu_item_id'] . '" class="btn text-white" style="background-color:#E57C23" > <i class="fas fa-cart-plus"></i> Book Now</a>';
 
                     echo '</div>';
                     echo '</div>';
