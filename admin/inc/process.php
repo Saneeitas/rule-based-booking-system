@@ -33,30 +33,31 @@ if (isset($_POST["login"])) {
 
     //check if user exist
     $sql_check2 = "SELECT * FROM admin WHERE username = '$username'";
-    $query_check2 = mysqli_query($connection,$sql_check2);
-    if(mysqli_fetch_assoc($query_check2)){
-       //check if username and password exist
-       $sql_check = "SELECT * FROM admin WHERE username = '$username' AND password = '$encrypt_password'";
-       $query_check = mysqli_query($connection,$sql_check);
-       if($result = mysqli_fetch_assoc($query_check)){
-       //Login to dashboard
-       $_SESSION["user"] = $result;
-       if($result["role"] == "admin"){
-        header("location: dashboard.php");
-       }else{
-        header("location: index.php");
-       } 
-       $success = "User logged in";       
-     }else{ 
-    //user password wrong
-    $error = "User password wrong";
-}  
-       }else{
+    $query_check2 = mysqli_query($connection, $sql_check2);
+    if (mysqli_fetch_assoc($query_check2)) {
+        //check if username and password exist
+        $sql_check = "SELECT * FROM admin WHERE username = '$username' AND password = '$encrypt_password'";
+        $query_check = mysqli_query($connection, $sql_check);
+        if ($result = mysqli_fetch_assoc($query_check)) {
+            //Login to dashboard
+            $_SESSION["user"] = $result;
+            if ($result["role"] == "admin") {
+                $success = "User logged in. Redirecting to dashboard...";
+                echo '<meta http-equiv="refresh" content="2;url=dashboard.php" />';
+            } else {
+                header("location: index.php");
+            }
+        } else {
+            //user password wrong
+            $error = "User password wrong";
+        }
+    } else {
         //user not found
         $error = "User username not found";
-  } 
+    }
     $connection->close();
 }
+
 
 
 if (isset($_POST["add_food"])) {
