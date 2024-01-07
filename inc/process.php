@@ -57,29 +57,31 @@ if (isset($_POST["login"])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+
         if (password_verify($password, $user['password'])) {
             // Login successful, store user data in the session
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
 
-            $_SESSION['dietary_preferences'] = $user['dietary_preferences'];
-            $_SESSION['dietary_restrictions'] = $user['dietary_restrictions'];
+            // Check and assign dietary preferences and restrictions
+            $_SESSION['dietary_preferences'] = $user['dietary_preferences'] ?? null;
+            $_SESSION['dietary_restrictions'] = $user['dietary_restrictions'] ?? null;
 
             header("location: menu.php");
-                        //exit();
-
-                        $success = "User logged in";
+            exit();
         } else {
-            $error = "Incorrect password, Try again";
+            $error = "Incorrect password. Please try again.";
         }
     } else {
-        $error = "User not found, Try again";
+        $error = "User not found. Please try again.";
     }
 
     // Close the database connection
+    $stmt->close();
     $connection->close();
 }
+
 
 
 if (isset($_POST["booking"])) {

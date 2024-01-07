@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "inc/connection.php";
+require 'inc/process.php';
 //check if user is not logged in
 if (!isset($_SESSION["username"])) {
     header("location: login.php");
@@ -40,8 +41,7 @@ require "inc/header.php"; ?>
 
     <?php
     //header content
-    require './pages/header-home.php';
-    include 'inc/process.php'; ?>
+    require './pages/header-home.php'; ?>
 
    
      <div class="container mt-5">
